@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>New York Times Search</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+        crossorigin="anonymous">
+    <style>
+        .userInput {
+            width: 100%;
+            margin-bottom: 2%;
+        }
+        .formBody {
+            padding-left: 3%;
+            padding-right: 3%;
+        }
+        .inputButton {
+            margin-bottom: 2%;
+        }
+    </style>
+</head>
+<body>
+    <body>
+        <div class="jumbotron">
+            <h1 id="mainTitle" class="text-center">New York Times Search</h1>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div id="classHeading2" class="panel-heading">
+                            <h2 class="panel-title">Search Parameters</h2>
+                        </div>
+                        <div class="panel-body"></div>
+                        <form class="formBody">
+                            Search Term:
+                            <br>
+                            <input type="text" name="searchTerm" id="searchTerm" class="userInput" value="">
+                            <br> Number of records:
+                            <br>
+                            <input type="text" name="numberOfRecords" id="numberOfRecords" class="userInput" value="">
+                            <br> Start Year (Optional):
+                            <br>
+                            <input type="text" name="startYear" id="startYear" class="userInput" value="">
+                            <br> End Year (Optional):
+                            <br>
+                            <input type="text" name="endYear" id="endYear" class="userInput" value="">
+                            <br>
+                            <br>
+                            <input type="submit" class="inputButton" id="searchButton" value="Search">
+                            <input type="submit" class="inputButton" id="clearResultsButton" value="Clear Results">
+                            <br>
+                        </form>
+                           </div>
+                </div>
+            </div>
+        </div>
+  
+        <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div id="classHeading2" class="panel-heading">
+                                <h2 class="panel-title">Top Articles</h2>
+                            </div>
+                            <div class="panel-body"></div>
+    
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+         
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script type="text/javascript">
+        $("#searchButton").on("click", function() {
+            var InputSearch = $("searchTerm").val().trim()
+            var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=ba0b5f1645d34da28744b4f7992dd8c0&q="            
+            
+            var beginDateInput="";
+            var endDateInput="";
+            var beginDate = "&begin_date="+beginDateInput;
+            var endDate = "&end_date="+endDateInput;
+            
+            $.ajax({
+                url: queryURL+InputSearch,
+                method: 'GET',
+            }).then(function(response) {
+                console.log(response);
+                
+                var results = response.response.docs;
+                var headline="";
+                var snippet="";
+                var author="";
+                for (let i = 0; i < results.length; i++){
+                    console.log(results[i].headline.main);
+                    console.log(results[i].snippet);
+                    console.log(results[i].word_count);
+                    // console.log(results[i].byline.original);
+                    var resultsDiv = $("<div>")
+                        var h1 = $("<h1>")
+                            var p = $("<p>")
+                                h1 = results[i].headline.main;
+                                p = results[i].snippet;
+                                resultsDiv.append(h1,p);
+                            }
+                        });
+                    });
+                    // $("#searchButton").on("click", function(event) {
+                    //     event.preventDefault();
+                    //     var box1 = document.getElementById('searchTerm').value;
+                    //     var box2 = document.getElementById('numberOfRecords').value
+                    //     var box3 = document.getElementById('startYear').value
+                    //     var box4 = document.getElementById('endYear').value
+                    //     console.log(box1);
+                    //     console.log(box2);
+                    //     console.log(box3);
+                    //     console.log(box4);
+                    // });
+                    </script>
+                    </body>
+                    </html>
+
